@@ -22,6 +22,7 @@
 				<h4>List of existing todos</h4>
 			</div>
 			<div class="panel-body">
+			@if (count($todos) > 0)
 				@foreach($todos as $todo)
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -40,7 +41,10 @@
 							{{ Form::close() }}							
 						</div>
 					</div>
-				@endforeach			
+				@endforeach	
+			@else
+				<p class="lead text-info">There are no todos, please add one using the form above.</p>
+			@endif		
 			</div>
 		</div>
 	</div>
