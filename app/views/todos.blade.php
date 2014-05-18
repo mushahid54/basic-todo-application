@@ -21,30 +21,38 @@
 			<div class="panel-heading">
 				<h4>List of existing todos</h4>
 			</div>
+
 			<div class="panel-body">
-			@if (count($todos) > 0)
-				@foreach($todos as $todo)
-					<div class="panel panel-default">
-						<div class="panel-body">
-							{{ Form::model($todo, ['url' => array('todos/update',$todo->id), 'class'=>'form-inline']) }}
-								<div class="checkbox">
-					            	<label>
-					            		{{Form::checkbox('done')}}
-					            		@if ($todo->done)
-					            			<strike>{{$todo->description}}</strike>
-					            		@else
-					            			{{$todo->description}}
-					            		@endif
-					            	</label>
-					            </div>
-					            {{ Form::submit('update todo', array('class'=>'btn btn-primary pull-right')) }}
-							{{ Form::close() }}							
-						</div>
-					</div>
-				@endforeach	
-			@else
-				<p class="lead text-info">There are no todos, please add one using the form above.</p>
-			@endif		
+				@if (count($todos) > 0)
+					@foreach($todos as $todo)
+						{{ Form::model($todo, ['url' => array('todos/update',$todo->id), 'class'=>'form-inline col-md-10']) }}
+							<div class="checkbox">
+				            	<label>
+				            		{{Form::checkbox('done')}}
+				            		@if ($todo->done)
+				            			<strike>{{$todo->description}}</strike>
+				            		@else
+				            			{{$todo->description}}
+				            		@endif
+				            	</label>
+				            </div>
+							<button type="submit" class="btn btn-primary pull-right">
+								save
+								<span class="glyphicon glyphicon-floppy-disk"></span>
+							</button>							
+						{{ Form::close() }}			
+
+						{{Form::model($todo, ['url' => array('todos/delete',$todo->id),'class'=>'form-inline'])}}
+							<button type="submit" class="btn btn-danger">
+								delete
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						{{Form::close()}}
+						<br>
+					@endforeach	
+				@else
+					<p class="lead text-info">There are no todos, please add one using the form above.</p>
+				@endif		
 			</div>
 		</div>
 	</div>
